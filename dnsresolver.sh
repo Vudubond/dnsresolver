@@ -3,9 +3,9 @@
 # dns speed test
 #
 DIGGER="dig"
-if ! $DIGGER > /dev/null ; then 
+if ! $DIGGER > /dev/null ; then
     DIGGER="drill"
-    if ! $DIGGER > /dev/null ; then 
+    if ! $DIGGER > /dev/null ; then
         echo "No capable digger found"
         exit 1
     fi
@@ -32,6 +32,19 @@ if [[ -z "$SKIP" ]]; then
         echo " NextDNS 45.90.28.105 45.90.30.105"
         echo " OpenDNS 208.67.222.222 208.67.220.220"
         echo " Quad9 9.9.9.9 149.112.112.112"
+        echo "a.root-servers.net. 198.41.0.4"
+        echo "b.root-servers.net. 199.9.14.201"
+        echo "c.root-servers.net. 192.33.4.12"
+        echo "d.root-servers.net. 199.7.91.13"
+        echo "e.root-servers.net. 192.203.230.10"
+        echo "f.root-servers.net. 192.5.5.241"
+        echo "g.root-servers.net. 192.112.36.4"
+        echo "h.root-servers.net. 198.97.190.53"
+        echo "i.root-servers.net. 192.36.148.17"
+        echo "j.root-servers.net. 192.58.128.30"
+        echo "k.root-servers.net. 193.0.14.129"
+        echo "l.root-servers.net. 199.7.83.42"
+        echo "m.root-servers.net. 202.12.27.33"
         echo
         if [[ -n "$TESTDNS" ]]; then
             echo "Custom $TESTDNS"
@@ -52,7 +65,7 @@ while true; do
                 elif systemctl is-active dnsmasq.service > /dev/null ; then
                     systemctl restart dnsmasq.service > /dev/null ;
                 else echo -e "\n No service found.\n" ;
-                fi ; break ;;        
+                fi ; break ;;
         [Nn]* ) break ;;
         * ) echo -e "\n Please answer yes or no.\n" ;;
     esac
@@ -67,7 +80,7 @@ done | awk '/ms/ {sum+=$1} END {print "Avg time: ",sum/3, " ms"}'
 echo
 if [[ -z "$SKIP" ]]; then
     rank() {
-        for resolver in "AdGuard 94.140.14.14" "CleanBrowsing 185.228.168.9" "Cloudflare 1.1.1.1" "Control-D 76.76.2.2" "Gcore 95.85.95.85" "Google 8.8.8.8" "Neustar 156.154.70.2" "NextDNS 45.90.28.105" "OpenDNS 208.67.222.222" "Quad9 9.9.9.9";
+        for resolver in "AdGuard 94.140.14.14" "CleanBrowsing 185.228.168.9" "Cloudflare 1.1.1.1" "Control-D 76.76.2.2" "Gcore 95.85.95.85" "Google 8.8.8.8" "Neustar 156.154.70.2" "NextDNS 45.90.28.105" "OpenDNS 208.67.222.222" "Quad9 9.9.9.9" "a.root-servers.net. 198.41.0.4" "b.root-servers.net. 199.9.14.201" "c.root-servers.net. 192.33.4.12" "d.root-servers.net. 199.7.91.13" "e.root-servers.net. 192.203.230.10" "f.root-servers.net. 192.5.5.241" "g.root-servers.net. 192.112.36.4" "h.root-servers.net. 198.97.190.53" "i.root-servers.net. 192.36.148.17" "j.root-servers.net. 192.58.128.30" "k.root-servers.net. 193.0.14.129" "l.root-servers.net. 199.7.83.42" "m.root-servers.net. 202.12.27.33";
         do
             echo "$resolver"
             for reps in {1..3}
