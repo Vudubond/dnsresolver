@@ -38,7 +38,7 @@ if [[ -z "$SKIP" ]]; then
         fi
     }
     printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' -
-    annc | column -tL
+    annc | column -t
 fi;
 printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' -
 echo
@@ -49,7 +49,7 @@ while true; do
                     resolvectl flush-caches > /dev/null ;
                 elif systemctl is-active named.service > /dev/null ; then
                     rndc reload > /dev/null ;
-                elif systemct is-active dnsmasq.service > /dev/null ; then
+                elif systemctl is-active dnsmasq.service > /dev/null ; then
                     systemctl restart dnsmasq.service > /dev/null ;
                 else echo -e "\n No service found.\n" ;
                 fi ; break ;;        
